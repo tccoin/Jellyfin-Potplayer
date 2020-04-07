@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOT\potplayer]
+@="URL:potplayer protocol"
+"URL Protocol"=""
+[HKEY_CLASSES_ROOT\potplayer\shell]
+[HKEY_CLASSES_ROOT\potplayer\shell\open]
+[HKEY_CLASSES_ROOT\potplayer\shell\open\command]
+@="powershell -File C:\\Users\\Tccoin\\Codes\\jellyfin-potplayer\\potplayer.ps1 %1"
