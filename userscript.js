@@ -13,6 +13,7 @@
         ApiClient.getItem(userid, itemid).then(r => {
             if (r.Path) {
                 let path = r.Path.replace(/\\/g, '/').replace('D:', 'Z:');
+                console.log(path);
                 window.open('potplayer://' + path)
             } else {
                 ApiClient.getItems(userid, itemid).then(r => openPotplayer(r.Items[0].Id));
@@ -23,14 +24,11 @@
     let bindEvent = async () => {
         let buttons = [];
         let retry = 6 + 1;
-        console.log(retry);
         while (buttons.length == 0 && retry > 0) {
             await new Promise(resolve => setTimeout(resolve, 500));
             buttons = document.querySelectorAll('[data-mode=play],[data-mode=resume],[data-action=resume]');
             retry -= 1;
-            console.log(retry, document.querySelectorAll('[data-mode=play],[data-mode=resume],[data-action=resume]'));
         }
-        console.log(buttons);
         for (let button of buttons) {
             let nextElementSibling = button.nextElementSibling;
             let parentElement = button.parentElement;
@@ -65,6 +63,28 @@
             });
         }
     };
+
+    let lazyload = () => {
+        let items = document.querySelectorAll('[data-src].lazy');
+        let y = document.scrollingElement.scrollTop;
+        let intersectinglist = [];
+        for (let item of items) {
+            let windowHeight = document.body.offsetHeight;
+            let itemTop = item.getBoundingClientRect().top;
+            let itemHeight = item.offsetHeight;
+            if (itemTop + itemHeight >= 0 && itemTop <= windowHeight) {
+                intersectinglist.push(item);
+            }
+        }
+        for (let item of intersectinglist) {
+            item.style.setProperty('background-image', `url("${item.getAttribute('data-src')}")`);
+            item.classList.remove('lazy');
+            item.removeAttribute('data-src');
+        };
+    };
+
+    window.addEventListener('scroll', lazyload);
+
     window.addEventListener('viewshow', async () => {
         bindEvent();
         window.addEventListener('hashchange', bindEvent);
