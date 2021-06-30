@@ -9,7 +9,7 @@
 (function() {
   'use strict';
   let openPotplayer = (itemid) => {
-    let userid = ConnectionManager.getLastUsedServer().UserId;
+    let userid = (await ApiClient.getCurrentUser()).Id;
     ApiClient.getItem(userid, itemid).then(r => {
       if (r.Path) {
         let path = r.Path.replace(/\\/g, '/');
