@@ -8,7 +8,7 @@
 
 (function() {
   'use strict';
-  let openPotplayer = (itemid) => {
+  let openPotplayer = async (itemid) => {
     let userid = (await ApiClient.getCurrentUser()).Id;
     ApiClient.getItem(userid, itemid).then(r => {
       if (r.Path) {
@@ -22,7 +22,7 @@
     })
   };
 
-  let bindEvent = async() => {
+  let bindEvent = async () => {
     let buttons = [];
     let retry = 6 + 1;
     while (buttons.length == 0 && retry > 0) {
