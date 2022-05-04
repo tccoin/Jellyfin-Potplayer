@@ -5,4 +5,4 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\potplayer\shell]
 [HKEY_CLASSES_ROOT\potplayer\shell\open]
 [HKEY_CLASSES_ROOT\potplayer\shell\open\command]
-@="powershell -File C:\\codes\\Jellyfin-Potplay\\potplayer.ps1 %1"
+@="powershell -File C:\\codes\\Jellyfin-Potplayer\\potplayer.ps1 %1"
