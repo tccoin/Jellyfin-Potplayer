@@ -23,3 +23,10 @@ Tested with Jellyfin 10.5.2 and Windows 10. Newer version is not promised to wor
 
 A user script modifies the play buttons in Jellyfin so that the web player will not be called. Instead, a link will be opened and it's a "url protocol" for Potplayer. The url protocol will firstly call a powershell script and then pass the video path to Potplayer. That's it!
 
+## FAQ
+
+### The browser succeed to bring up the PowerShell script but PotPlayer won't start
+This is related to Powershell Execution Policy, please see https://github.com/tccoin/Jellyfin-Potplayer/issues/5 for solution.
+
+### Additional backslash at the end of the path in PotPlayer
+See solution in https://github.com/tccoin/Jellyfin-Potplayer/issues/11 (the issue is in Chinese).
